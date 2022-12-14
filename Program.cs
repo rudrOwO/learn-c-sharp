@@ -1,12 +1,23 @@
 ﻿using Testing;
 using Logging;
 
-var tester = new Tester();
-var betaTester = new BetaTester();
-var logger = new Logger();
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        var tester = new Tester();
+        var logger = new Logger();
 
-tester.TestComplete += logger.Log;
-betaTester.TestComplete += logger.Log;
+        // Emulating subscription
+        tester.TestComplete += logger.Log;
+        tester.TestComplete += NewHandler;
 
-tester.PerformTest();
-betaTester.PerformTest();
+        // Event Trigger
+        tester.PerformTest();
+    }
+
+    public static void NewHandler(object? source, EventArgs eventArgs)
+    {
+        System.Console.WriteLine("NEW Handler invoked");
+    }
+}
