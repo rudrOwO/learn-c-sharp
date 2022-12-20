@@ -6,14 +6,14 @@ class Tester
     // public delegate void LoggingHandler();
     public event EventHandler? TestComplete;
 
-    protected void SetConsoleColor()
+    protected static void SetConsoleColor()
     {
         Console.ForegroundColor = ConsoleColor.DarkCyan;
     }
 
     public virtual void PerformTest()
     {
-        this.SetConsoleColor();
+        SetConsoleColor();
         System.Console.WriteLine("Performing BASE Test");
         this.OnTestComplete();
     }
@@ -30,7 +30,7 @@ class BetaTester : Tester
 {
     public override void PerformTest()
     {
-        base.SetConsoleColor();
+        SetConsoleColor();
         System.Console.WriteLine("Performing BETA Test");
         base.OnTestComplete();
     }
