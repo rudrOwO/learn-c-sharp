@@ -7,7 +7,7 @@ public static class Dummy
         Console.WriteLine(s);
     }
 
-    async public static Task TaskAsync()
+    async public static Task<int> TaskAsync(int id)
     {
         var threadID = Environment.CurrentManagedThreadId;
         var client = new HttpClient();
@@ -17,6 +17,7 @@ public static class Dummy
         Console.ForegroundColor = ConsoleColor.Gray;
 
         await client.GetStringAsync("https://www.google.com");
+        return id;
     }
 
     public static void Dump(this string s, string id)

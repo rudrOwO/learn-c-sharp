@@ -2,14 +2,21 @@
 using Logging;
 using learn_dotnet.models;
 
-var tasks = new List<Task>
+internal class Program
 {
-    Dummy.TaskAsync(),
-    Dummy.TaskAsync(),
-    Dummy.TaskAsync(),
-    Dummy.TaskAsync(),
-    Dummy.TaskAsync(),
-};
+    async public static Task Main()
+    {
+        var tasks = new List<Task<int>>
+        {
+            Dummy.TaskAsync(1),
+            Dummy.TaskAsync(2),
+            Dummy.TaskAsync(3),
+            Dummy.TaskAsync(4),
+            Dummy.TaskAsync(5),
+        };
 
-await Task.WhenAll(tasks);
-Console.WriteLine("All Done");
+        var firstTask = await Task.WhenAny(tasks);
+        var taskID = await firstTask;
+        Console.WriteLine($"First Done : {taskID}");
+    }
+}
