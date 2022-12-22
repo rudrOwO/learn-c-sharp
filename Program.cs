@@ -1,22 +1,26 @@
-﻿using Testing;
-using Logging;
+﻿using Logging;
 using learn_dotnet.models;
+using System.Linq;
 
-internal class Program
+var numbers = new int[] {5, 4, 1, 2, 3, 4, 5, 8, 9};
+
+int i = 0;
+//var q = from n in numbers 
+//        select n * n;
+
+var q = numbers.Select(n => i++);
+
+Console.WriteLine(q.GetType());
+
+var parity = 0;
+foreach (var v in q)
 {
-    async public static Task Main()
-    {
-        var tasks = new List<Task<int>>
-        {
-            Dummy.TaskAsync(1),
-            Dummy.TaskAsync(2),
-            Dummy.TaskAsync(3),
-            Dummy.TaskAsync(4),
-            Dummy.TaskAsync(5),
-        };
-
-        var firstTask = await Task.WhenAny(tasks);
-        var taskID = await firstTask;
-        Console.WriteLine($"First Done : {taskID}");
-    }
+    //if (parity % 2 == 0)
+    //{
+    //    Console.WriteLine($"v = {v}, i = {i}");
+    //}
+    //
+    //parity++;
 }
+
+Console.WriteLine(i);
